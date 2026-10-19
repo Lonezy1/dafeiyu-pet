@@ -38,7 +38,8 @@ if (-not (Test-Path $npmCmd)) { $npmCmd = "npm.cmd" }
 # ---------- 2. Configure npm (China mirrors + user dir, no admin) ----------
 Write-Host "[2/5] Configuring China mirrors (npm + electron)"
 & $npmCmd config set registry https://registry.npmmirror.com 2>$null
-& $npmCmd config set electron_mirror https://npmmirror.com/mirrors/electron/ 2>$null
+# Note: npm 11+ rejects custom config keys like electron_mirror (caused exit).
+# Electron mirror is already set via $env:ELECTRON_MIRROR at the top of this script.
 & $npmCmd config set prefix "$env:LOCALAPPDATA\npm" 2>$null
 $env:PATH = "$env:LOCALAPPDATA\npm;$env:PATH"
 
