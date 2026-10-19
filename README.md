@@ -26,6 +26,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -Command "$urls=@('https://cdn.jsd
 
 - **启动**：双击桌面的「启动大肥鱼.bat」，鱼就会出现（无需再下载任何东西）
 - **关闭**：在黑色命令行窗口按 `Ctrl + C`，或直接关闭窗口
+- **关不掉（直接关了窗口鱼还在）**：双击桌面「关闭所有大肥鱼.bat」一键全部关掉
 - **开机自启**：按 `Win + R` 输入 `shell:startup`，把桌面的启动器拖进弹出的文件夹
 
 ## 🐳 多开：只用一个启动器，双击几次就几只
