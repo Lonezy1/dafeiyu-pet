@@ -54,18 +54,22 @@ if ($LASTEXITCODE -ne 0) {
 Write-Host "[4/5] Creating desktop launcher..."
 $desktop = [Environment]::GetFolderPath('Desktop')
 $launcher = Join-Path $desktop ([char]0x542F + [char]0x52A8 + [char]0x5927 + [char]0x80A5 + [char]0x9C7C + '.bat')
-$launcherContent = @('@echo off','title DaFeiYu Desktop Pet','"%LOCALAPPDATA%\npm\dsh-pet-standalone.cmd"','pause')
+$launcherContent = @('@echo off','title DaFeiYu Desktop Pet','set "PATH=%LOCALAPPDATA%\node-v24.19.0-win-x64;%LOCALAPPDATA%\npm;%PATH%"','"%LOCALAPPDATA%\npm\dsh-pet-standalone.cmd"','pause')
 [System.IO.File]::WriteAllLines($launcher, $launcherContent, (New-Object System.Text.ASCIIEncoding))
 Write-Host "Desktop launcher created."
 
 # ---------- 5. Start the pet ----------
 Write-Host "[5/5] First launch may download Electron runtime (~115MB from China mirror), please wait 1-3 min"
-Write-Host "After startup, DaFeiYu will appear on your desktop."
-Write-Host ""
-Write-Host "Starting the pet..."
-& "$env:LOCALAPPDATA\npm\dsh-pet-standalone.cmd"
-Write-Host ""
-Write-Host "The pet has exited (or failed to start)."
+$already = Get-NetTCPConnection -LocalPort 3080 -State Listen -ErrorAction SilentlyContinue
+if ($already) {
+    Write-Host "A pet instance is already running (port 3080). Skip starting to avoid duplicates."
+    Write-Host "If the pet is missing, close the old black window first, then double-click the desktop launcher."
+} else {
+    Write-Host "Starting the pet... (look for 'desktop helper started' in the log = success)"
+    & "$env:LOCALAPPDATA\npm\dsh-pet-standalone.cmd"
+    Write-Host ""
+    Write-Host "The pet has exited (or failed to start)."
+}
 Write-Host "Tip: keep this window open while the pet runs; you may minimize it."
 Write-Host "Next time: double-click the desktop launcher to start; no download needed."
 Read-Host "Press Enter to exit"
