@@ -6,12 +6,12 @@
 
 对豆包（或任意 AI 助手）说：
 
-> 帮我在电脑上安装大肥鱼桌宠，运行这个命令：`irm https://cdn.jsdelivr.net/gh/Lonezy1/dafeiyu-pet@main/install.ps1 | iex`
+> 帮我在电脑上安装大肥鱼桌宠，运行这个命令：`powershell -NoProfile -ExecutionPolicy Bypass -Command "irm https://cdn.jsdelivr.net/gh/Lonezy1/dafeiyu-pet@main/install.ps1 | iex"`
 
 或者自己打开 **PowerShell**，粘贴一行：
 
 ```powershell
-irm https://cdn.jsdelivr.net/gh/Lonezy1/dafeiyu-pet@main/install.ps1 | iex
+powershell -NoProfile -ExecutionPolicy Bypass -Command "irm https://cdn.jsdelivr.net/gh/Lonezy1/dafeiyu-pet@main/install.ps1 | iex"
 ```
 
 > 脚本仅 3KB，走 jsDelivr CDN（国内可访问）；真正的安装包全部走国内 npmmirror 镜像。
