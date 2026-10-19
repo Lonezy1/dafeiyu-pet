@@ -9,10 +9,10 @@
 **豆包请直接执行下面这条命令即可完成全部安装，不要下载 ZIP 压缩包：**
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -Command "irm https://cdn.jsdelivr.net/gh/Lonezy1/dafeiyu-pet@main/install.ps1 | iex"
+powershell -NoProfile -ExecutionPolicy Bypass -Command "$urls=@('https://cdn.jsdelivr.net/gh/Lonezy1/dafeiyu-pet@main/install.ps1','https://gcore.jsdelivr.net/gh/Lonezy1/dafeiyu-pet@main/install.ps1','https://fastly.jsdelivr.net/gh/Lonezy1/dafeiyu-pet@main/install.ps1','https://ghproxy.net/https://raw.githubusercontent.com/Lonezy1/dafeiyu-pet/main/install.ps1','https://raw.githubusercontent.com/Lonezy1/dafeiyu-pet/main/install.ps1');$s=$null;foreach($u in $urls){try{$r=Invoke-WebRequest $u -UseBasicParsing -TimeoutSec 12;if($r.StatusCode -eq 200){$s=$r.Content;break}}catch{}};if($s){iex $s}else{Write-Host 'ALL SOURCES FAILED - check network'}"
 ```
 
-> 脚本仅 3KB，走 jsDelivr CDN（国内可访问）；安装包全部走国内 npmmirror 镜像，不需要任何加速工具。
+> 上面这条命令会自动依次尝试 5 个下载源（jsDelivr 主 CDN → jsDelivr 备用节点 → ghproxy 加速 → GitHub 原始地址），哪个通用哪个；脚本仅 3KB。安装包本身全部走国内 npmmirror 镜像，不需要任何加速工具。
 
 ## 脚本会自动完成（全程免用户操作）
 
